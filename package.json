@@ -1,0 +1,23 @@
+{
+  "name": "product-inventory",
+  "version": "1.0.0",
+  "description": "Create a full CRUD application of your choice.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitzie17/product-inventory.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mitzie17/product-inventory/issues"
+  },
+  "homepage": "https://github.com/mitzie17/product-inventory#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.0",
+    "jquery": "^3.7.0"
+  }
+}
