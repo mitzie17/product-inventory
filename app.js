@@ -1,10 +1,10 @@
 class Article {
-    constructor(name, subfamily, price) {
+    constructor(name, subfamily, price, units, image) {
         this.name = name;
         this.subfamily = subfamily;
         this.price = price;
-        this.image =image;
-        this.units = [ ]
+        this.units = units;
+        this.image = image
     }
 }
 
@@ -50,6 +50,14 @@ class DOMManager {
             this.render(articles));
     }
 
+    static createArticle(name, subfamily, price, units, image) {
+        ArticleInventory.createArticle(new Article(name, subfamily, price, units, image))
+        .then(() => {
+            return ArticleInventory.getAllArticles();
+        })
+        .then((articles) => this.render(articles));
+    }
+
     static deleteArticle(id) {
         ArticleInventory.deleteArticle(id)
         .then(() => {
@@ -87,5 +95,19 @@ class DOMManager {
         }
     }
 }
+
+$('#create-new-article').click(() => {
+    DOMManager.createArticle($('#new-article-name').val(),
+    $('#new-article-subfamily').val(),
+    $('#new-article-price').val(),
+    $('#new-article-units').val(),
+    $('#new-article-image').val());
+
+    $('#new-article-name').val('');
+    $('#new-article-subfamily').val('');
+    $('#new-article-price').val('');
+    $('#new-article-units').val('');
+    $('#new-article-image').val('');
+});
 
 DOMManager.getAllArticles();
