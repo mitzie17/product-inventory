@@ -3,6 +3,7 @@ class Article {
         this.name = name;
         this.subfamily = subfamily;
         this.price = price;
+        this.image =image;
         this.units = [ ]
     }
 }
@@ -39,3 +40,52 @@ class ArticleInventory {
         });
     }
 }
+
+class DOMManager {
+    static articles;
+    
+    static getAllArticles() {
+        ArticleInventory.getAllArticles()
+        .then(articles =>
+            this.render(articles));
+    }
+
+    static deleteArticle(id) {
+        ArticleInventory.deleteArticle(id)
+        .then(() => {
+            return ArticleInventory.getAllArticles();
+        })
+        .then((articles) => this.render(articles));
+    }
+
+    static render(articles) {
+        this.articles = articles;
+        $('#app').empty();
+        for (let article of articles) {
+            $('#app').prepend(
+                `<div id="${article.id}" class="card">
+                    <div class="card-header">
+                        <h2>${article.name}</h2>
+                        <button class="btn btn-danger" onclick="DOMManager.deleteArticle('${article.id}')">Delete</button>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-sm">
+                                <h4>${article.subfamily}</h4>
+                                <h4>Price: $ ${article.price}</h4>
+                                <h4>Available Units: ${article.units}</h4>
+                                <img src="${article.image}" alt="article image" width="500" height="600">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>`
+            );
+        }
+    }
+}
+
+DOMManager.getAllArticles();
