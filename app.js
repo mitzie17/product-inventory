@@ -41,11 +41,10 @@ class ArticleInventory {
     // Somewhere here is where the article object doesn't get updated in the database. Did some research but could not find a way for 
     // the newly edited article to re-render with the new edited information. Currently still working on this....
         return $.ajax({
-            url: this.url + `/${id}`,
+            url: this.url + '/' + id,
             dataType: 'json',
             data: JSON.stringify(article),
-            contentTpye: 'application/json',
-            crossDomain: true,
+            contentType: 'application/json',
             type: 'PUT'
         }).then(() => {
             return ArticleInventory.getAllArticles();
